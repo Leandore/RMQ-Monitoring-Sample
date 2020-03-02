@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ETL-Metrics": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

@@ -1,0 +1,74 @@
+version: '3.4'
+
+volumes:
+  opt-splunk-etc:
+  opt-splunk-var:
+
+services:
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    build:
+      context: .
+      dockerfile: mongo/Dockerfile
+    volumes:
+      - ./mongo/data:/data # Helps to store MongoDB data in `./mongo/data`
+  rabbit:
+    image: rabbitmq:3-management-alpine
+    restart: always
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    environment:
+      - RABBITMQ_DEFAULT_VHOST=AIML_DEV1
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+  metrics:
+    image: ${DOCKER_REGISTRY-}metrics
+    build:
+      context: .
+      dockerfile: ETL-Metrics/Dockerfile
+    depends_on:
+      - rabbit
+      - mongodb
+      - metricgen
+      - splunk
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - RABBITINFRASTRUCTURE__RMQHOST=${RABBITINFRASTRUCTURE__RMQHOST}
+      - RABBITINFRASTRUCTURE__RMQUSERNAME=${RABBITINFRASTRUCTURE__RMQUSERNAME}
+      - RABBITINFRASTRUCTURE__RMQPASSWORD=${RABBITINFRASTRUCTURE__RMQPASSWORD}
+      - RABBITINFRASTRUCTURE__VHOST=${RABBITINFRASTRUCTURE__VHOST}
+
+  metricgen:
+    image: ${DOCKER_REGISTRY-}metricgen
+    build:
+      context: .
+      dockerfile: MetricGen/Dockerfile
+    depends_on:
+     - rabbit
+     - mongodb
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+
+  splunk:
+    image: splunk/splunk:7.0.3
+    hostname: splunk
+    environment:
+      SPLUNK_START_ARGS: --accept-license --answer-yes
+      SPLUNK_ENABLE_LISTEN: 9997
+      SPLUNK_ADD: tcp 1514
+    volumes:
+      - opt-splunk-etc:/opt/splunk/etc
+      - opt-splunk-var:/opt/splunk/var
+    ports:
+      - "8000:8000"
+      - "9997:9997"
+      - "8088:8088"
+      - "1514:1514/udp"

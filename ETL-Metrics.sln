@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29509.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ETL-Metrics", "ETL-Metrics\ETL-Metrics.csproj", "{C5E43259-084A-4535-8ED4-30F3B10F4E89}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{E4B00899-46D4-4452-8E51-C0872BD01431}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "mongo", "mongo", "{4A4FD3FE-2427-4692-AF36-091BD15ECBD0}"
+	ProjectSection(SolutionItems) = preProject
+		mongo\Dockerfile = mongo\Dockerfile
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricGen", "MetricGen\MetricGen.csproj", "{4A500B83-C1CE-4F35-A343-5A83474A2382}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{B78CE4B9-0CF4-45B9-A2C3-1239418D6C59}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C5E43259-084A-4535-8ED4-30F3B10F4E89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5E43259-084A-4535-8ED4-30F3B10F4E89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5E43259-084A-4535-8ED4-30F3B10F4E89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5E43259-084A-4535-8ED4-30F3B10F4E89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4B00899-46D4-4452-8E51-C0872BD01431}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4B00899-46D4-4452-8E51-C0872BD01431}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4B00899-46D4-4452-8E51-C0872BD01431}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4B00899-46D4-4452-8E51-C0872BD01431}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A500B83-C1CE-4F35-A343-5A83474A2382}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A500B83-C1CE-4F35-A343-5A83474A2382}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A500B83-C1CE-4F35-A343-5A83474A2382}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A500B83-C1CE-4F35-A343-5A83474A2382}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B78CE4B9-0CF4-45B9-A2C3-1239418D6C59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B78CE4B9-0CF4-45B9-A2C3-1239418D6C59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B78CE4B9-0CF4-45B9-A2C3-1239418D6C59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B78CE4B9-0CF4-45B9-A2C3-1239418D6C59}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EF1D4BCE-97E3-400E-AEF2-151B2F2D9C08}
+	EndGlobalSection
+EndGlobal
